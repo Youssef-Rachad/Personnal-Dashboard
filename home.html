@@ -131,7 +131,9 @@
           <input type="text" id="taskName" placeholder="Task name">
           <input type="date" id="dueDate">
           <input type="text" id="courseName" placeholder="Course">
-          <button id="submitTask">Submit</button>
+
+          <button id="submitTask" style="display:inline-block">Submit</button>
+          <button id="clearModal" style="display:inline-block">Oops</button>
       </div>
   </div>
 
@@ -214,6 +216,14 @@
               modal.style.display = 'none';
           }
       });
+
+      document.getElementById("clearModal").addEventListener('click', ()=>{
+              // Clear input fields and close modal
+              taskNameInput.value = '';
+              dueDateInput.value = '';
+              courseNameInput.value = '';
+              modal.style.display = 'none';
+      })
 
       // Retrieve tasks from local storage and populate the task lists
       var courseSections = document.querySelectorAll('.course-section');
