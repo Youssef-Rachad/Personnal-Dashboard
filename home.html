@@ -1,272 +1,409 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Custom Home Page</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+    <head>
+        <meta charset="UTF-8">
+        <title>&gt;&lt;(((^&gt;    &#x2307;&#x2307;  &#x2307;   &#x25A4;&#x2307;&#x2307;</title>
+        <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
 
     h1 {
-      font-size: 24px;
+        font-size: 24px;
     }
 
     #websites {
-      margin-top: 20px;
+        margin-top: 20px;
     }
 
     #websites a {
-      display: inline-block;
-      padding: 10px;
-      margin-right: 10px;
-      text-decoration: none;
-      color: #333;
+        display: inline-block;
+        padding: 10px;
+        margin-right: 10px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    #wrapper {
+        all: unset;
+        display:flex;
+        width:100vw;
+        justify-content: space-around;
     }
 
     #dashboard {
-      margin-top: 30px;
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, auto);
+        grid-gap: 20px;
+        width: 70vw;
     }
 
+    #daily {
+        width: 20vw;
+    }
     .course-section {
-      margin-bottom: 20px;
+        margin-bottom: 20px;
     }
 
     .course-section h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
+        font-size: 18px;
+        margin-bottom: 10px;
     }
 
     .task-list {
-      margin-top: 10px;
-      list-style-type: none;
-      padding: 0;
+        margin-top: 10px;
+        list-style-type: none;
+        padding: 0;
     }
 
     .task-list li {
-      margin-bottom: 5px;
+        margin-bottom: 5px;
     }
 
-    .task-list li.complete {
-      color: green;
+    .task-list li.complete, .daily-list li.complete {
+        color: green;
     }
 
     .task-list li button {
-      margin-left: 10px;
+        margin-left: 10px;
     }
 
-    #myModal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.5);
+    #myModal, #myModalDaily {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
     }
 
     .modal-content {
-      background-color: #fefefe;
-      margin: 10% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
     }
 
     .modal-content input[type="text"],
     .modal-content input[type="date"] {
-      display: block;
-      margin-bottom: 10px;
-      width: 100%;
-      padding: 5px;
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+        padding: 5px;
     }
 
     .modal-content button {
-      display: block;
-      margin-top: 10px;
+        display: block;
+        margin-top: 10px;
     }
-  </style>
-</head>
-<body>
-  <h1 id="currentDate"></h1>
+        </style>
+    </head>
+    <body>
+        <h1 id="currentDate"></h1>
 
-  <div id="websites">
-    <a href="http://website1.com">Website 1 &#x1F30D;</a>
-    <a href="http://website2.com">Website 2 &#x1F4D6;</a>
-    <a href="http://website3.com">Website 3 &#x1F4D9;</a>
-    <a href="http://website4.com">Website 4 &#x1F4E1;</a>
-    <a href="http://website5.com">Website 5 &#x1F680;</a>
-  </div>
+        <div id="websites">
+            <a href="http://q.utoronto.ca" target=_blank>Quercus &#x1F30D;</a>
+            <a href="http://piazza.com" target=_blank>Piazza &#x1F4D6;</a>
+            <a href="http://website3.com" target=_blank>Website 3 &#x1F4D9;</a>
+            <a href="http://website4.com" target=_blank>Website 4 &#x1F4E1;</a>
+            <a href="http://website5.com" target=_blank>Website 5 &#x1F680;</a>
+        </div>
 
-  <div id="dashboard">
-      <button class="add-task">Add Task</button>
-      <div class="course-section" id='ESC301'>
-          <h2>Course 1 ESC301</h2>
-          <ul class="task-list"></ul>
-      </div>
-      <div class="course-section">
-          <h2>Course 2</h2>
-          <ul class="task-list"></ul>
-      </div>
-      <div class="course-section">
-          <h2>Course 3</h2>
-          <ul class="task-list"></ul>
-      </div>
-      <div class="course-section">
-          <h2>Course 4</h2>
-          <ul class="task-list"></ul>
-      </div>
-      <div class="course-section">
-          <h2>Course 5</h2>
-          <ul class="task-list"></ul>
-      </div>
-  </div>
+        <button class="add-task">Add Task</button>
+        <div id="wrapper">
+            <div id="dashboard">
+                <div class="course-section" id='APM346'>
+                    <h2>APM346</h2>
+                    <ul class="task-list"></ul>
+                </div>
+                <div class="course-section" id="ESC190">
+                    <h2>ESC190 (180)</h2>
+                    <ul class="task-list"></ul>
+                </div>
+                <div class="course-section" id="RL101">
+                    <h2>RL101</h2>
+                    <ul class="task-list"></ul>
+                </div>
+                <div class="course-section" id="Learning">
+                    <h2>Learning</h2>
+                    <ul class="task-list"></ul>
+                </div>
+                <div class="course-section" id="Qiskit">
+                    <h2>Qiskit Summer School</h2>
+                    <ul class="task-list"></ul>
+                </div>
+                <div class="course-section" id="Q-SITE">
+                    <h2>Q-SITE conference</h2>
+                    <ul class="task-list"></ul>
+                </div>
 
-  <div id="myModal">
-      <div class="modal-content">
-          <input type="text" id="taskName" placeholder="Task name">
-          <input type="date" id="dueDate">
-          <input type="text" id="courseName" placeholder="Course">
+            </div>
+            <div id="daily">
+                <h2>Dailys <button id="addDaily">Add</button></h2>
+                <ul class="daily-list"></ul>
+                <div>
+                    <div>
 
-          <button id="submitTask" style="display:inline-block">Submit</button>
-          <button id="clearModal" style="display:inline-block">Oops</button>
-      </div>
-  </div>
+                        <div id="myModal">
+                            <div class="modal-content">
+                                <input type="text" id="taskName" placeholder="Task name">
+                                <input type="date" id="dueDate">
+                                <input type="text" id="courseName" placeholder="Course">
 
-  <script>
-      // Get current date and display it
-      var currentDateElement = document.getElementById('currentDate');
-      var currentDate = new Date().toDateString();
-      currentDateElement.textContent = currentDate;
+                                <button id="submitTask" style="display:inline-block">Submit</button>
+                                <button id="clearModal" style="display:inline-block">Oops</button>
+                            </div>
+                        </div>
+                        <div id="myModalDaily">
+                            <div class="modal-content">
+                                <input type="text" id="dailyName" placeholder="Task name">
 
-      // Websites LMAO this has to be unecessary
-      var websiteLinks = document.querySelectorAll('#websites a');
-      websiteLinks.forEach(function(link) {
-          link.addEventListener('click', function(event) {
-              event.preventDefault();
-              var url = this.getAttribute('href');
-              window.open(url, '_blank');
-          });
-      });
+                                <button id="submitDaily" style="display:inline-block">Submit</button>
+                                <button id="clearModalDaily" style="display:inline-block">Oops</button>
+                            </div>
+                        </div>
 
-      // Task Modal
-      var modal = document.getElementById('myModal');
-      var addTaskButtons = document.querySelectorAll('.add-task');
-      var submitTaskButton = document.getElementById('submitTask');
-      var taskNameInput = document.getElementById('taskName');
-      var dueDateInput = document.getElementById('dueDate');
-      var courseNameInput = document.getElementById('courseName');
+                        <script>
+                            // Get current date and display it
+                            var currentDateElement = document.getElementById('currentDate');
+                            var currentDate = new Date().toDateString();
+                            currentDateElement.textContent = currentDate;
 
-      addTaskButtons.forEach(function(button) {
-          button.addEventListener('click', function() {
-              modal.style.display = 'block';
-          });
-      });
+                            // Websites LMAO this has to be unecessary
+                            /*
+                                var websiteLinks = document.querySelectorAll('#websites a');
+                            websiteLinks.forEach(function(link) {
+                                link.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                    var url = this.getAttribute('href');
+                                    window.open(url, '_blank');
+                                });
+                            });
+                            */
+                                // Task Modal
+                            var modal = document.getElementById('myModal');
+                            var addTaskButtons = document.querySelectorAll('.add-task');
+                            var submitTaskButton = document.getElementById('submitTask');
+                            var taskNameInput = document.getElementById('taskName');
+                            var dueDateInput = document.getElementById('dueDate');
+                            var courseNameInput = document.getElementById('courseName');
 
-      submitTaskButton.addEventListener('click', function(e) {
-          var taskName = taskNameInput.value.trim();
-          var dueDate = dueDateInput.value.trim();
-          if (taskName !== '' && dueDate !== '') {
-              var courseSection = document.getElementById(courseNameInput.value);
-              var taskList = courseSection.querySelector('.task-list');
+                            addTaskButtons.forEach(function(button) {
+                                button.addEventListener('click', function() {
+                                    modal.style.display = 'block';
+                                });
+                            });
 
-              var li = document.createElement('li');
-              li.textContent = taskName + ' (Due: ' + dueDate + ')';
-              var completeButton = document.createElement('button');
-              completeButton.textContent = 'Complete';
-              completeButton.addEventListener('click', function() {
-                  li.classList.toggle('complete');
-                  task.complete = !task.complete;
+                            submitTaskButton.addEventListener('click', function(e) {
+                                var taskName = taskNameInput.value.trim();
+                                var dueDate = dueDateInput.value.trim();
+                                if (taskName !== '' && dueDate !== '') {
+                                    var courseSection = document.getElementById(courseNameInput.value);
+                                    var taskList = courseSection.querySelector('.task-list');
 
-                  // Update task completion status in local storage
-                  localStorage.setItem(taskKey, JSON.stringify(tasks));
-              });
+                                    var li = document.createElement('li');
+                                    li.textContent = taskName + ' (Due: ' + dueDate + ')';
 
-              var deleteButton = document.createElement('button');
-              deleteButton.textContent = 'Delete';
-              deleteButton.addEventListener('click', function() {
-                  taskList.removeChild(li);
+                                    // Save task to local storage
+                                    var courseName = courseSection.querySelector('h2').textContent;
+                                    var taskKey = 'tasks-' + courseName;
+                                    var tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+                                    tasks.push({ name: taskName, dueDate: dueDate, complete: false });
+                                    localStorage.setItem(taskKey, JSON.stringify(tasks));
 
-                  // Remove task from local storage
-                  tasks = tasks.filter(function(t) {
-                      return t.name !== task.name && t.dueDate !== task.dueDate;
-                  });
-                  localStorage.setItem(taskKey, JSON.stringify(tasks));
-              });
+                                    loadTasks();
 
-              li.appendChild(completeButton);
-              li.appendChild(deleteButton);
-              taskList.appendChild(li);
+                                    // Clear input fields and close modal
+                                    taskNameInput.value = '';
+                                    dueDateInput.value = '';
+                                    courseNameInput.value = '';
+                                    modal.style.display = 'none';
+                                }
+                            });
 
-              // Save task to local storage
-              var courseName = courseSection.querySelector('h2').textContent;
-              var taskKey = 'tasks-' + courseName;
-              var tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
-              tasks.push({ name: taskName, dueDate: dueDate, complete: false });
-              localStorage.setItem(taskKey, JSON.stringify(tasks));
+                            document.getElementById("clearModal").addEventListener('click', ()=>{
+                                // Clear input fields and close modal
+                                taskNameInput.value = '';
+                                dueDateInput.value = '';
+                                courseNameInput.value = '';
+                                modal.style.display = 'none';
+                            });
 
-              // Clear input fields and close modal
-              taskNameInput.value = '';
-              dueDateInput.value = '';
-              courseNameInput.value = '';
-              modal.style.display = 'none';
-          }
-      });
+                            document.getElementById("addDaily").addEventListener('click', () => document.getElementById("myModalDaily").style.display = 'block');
 
-      document.getElementById("clearModal").addEventListener('click', ()=>{
-              // Clear input fields and close modal
-              taskNameInput.value = '';
-              dueDateInput.value = '';
-              courseNameInput.value = '';
-              modal.style.display = 'none';
-      })
+                            document.getElementById("submitDaily").addEventListener('click', function(e) {
+                                var dailyName = document.getElementById("dailyName").value.trim();
+                                if (dailyName !== '') {
+                                    var courseSection = document.getElementById(document.getElementById("dailyName").value);
+                                    var dailyList = document.querySelector('.daily-list');
 
-      // Retrieve tasks from local storage and populate the task lists
-      var courseSections = document.querySelectorAll('.course-section');
-      courseSections.forEach(function(section) {
-          var courseName = section.querySelector('h2').textContent;
-          var taskKey = 'tasks-' + courseName;
-          var tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+                                    var li = document.createElement('li');
+                                    li.textContent = dailyName;
+                                    var completeButton = document.createElement('button');
+                                    completeButton.textContent = 'Complete';
+                                    completeButton.addEventListener('click', function() {
+                                        li.classList.toggle('complete');
+                                        daily.complete = !daily.complete;
 
-          var taskList = section.querySelector('.task-list');
-          tasks.forEach(function(task) {
-              var li = document.createElement('li');
-              li.textContent = task.name + ' (Due: ' + task.dueDate + ')';
-              if (task.complete) {
-                  li.classList.add('complete');
-              }
+                                        // Update task completion status in local storage
+                                        localStorage.setItem(dailyKey, JSON.stringify(dailys));
+                                    });
 
-              var completeButton = document.createElement('button');
-              completeButton.textContent = 'Complete';
-              completeButton.addEventListener('click', function() {
-                  li.classList.toggle('complete');
-                  task.complete = !task.complete;
+                                    var deleteButton = document.createElement('button');
+                                    deleteButton.textContent = 'Delete';
+                                    deleteButton.addEventListener('click', function() {
+                                        dailyList.removeChild(li);
 
-                  // Update task completion status in local storage
-                  localStorage.setItem(taskKey, JSON.stringify(tasks));
-              });
+                                        // Remove task from local storage
+                                        dailys = dailys.filter(function(t) {
+                                            return t.name !== daily.name;
+                                        });
+                                        localStorage.setItem(dailyKey, JSON.stringify(dailys));
+                                    });
 
-              var deleteButton = document.createElement('button');
-              deleteButton.textContent = 'Delete';
-              deleteButton.addEventListener('click', function() {
-                  taskList.removeChild(li);
+                                    li.appendChild(completeButton);
+                                    li.appendChild(deleteButton);
+                                    dailyList.appendChild(li);
 
-                  // Remove task from local storage
-                  tasks = tasks.filter(function(t) {
-                      return t.name !== task.name && t.dueDate !== task.dueDate;
-                  });
-                  localStorage.setItem(taskKey, JSON.stringify(tasks));
-              });
+                                    // Save task to local storage
+                                    var dailyKey = 'daily';
+                                    var dailys = JSON.parse(localStorage.getItem(dailyKey)) || [];
+                                    dailys.push({ name: dailyName, complete: false });
+                                    localStorage.setItem(dailyKey, JSON.stringify(dailys));
 
-              li.appendChild(completeButton);
-              li.appendChild(deleteButton);
-              taskList.appendChild(li);
-          });
-      });
-  </script>
-</body>
+                                    // Clear input fields and close modal
+                                    document.getElementById("dailyName").value = '';
+                                    document.getElementById("myModalDaily").style.display = 'none';
+                                }
+                            });
+
+                            document.getElementById("clearModalDaily").addEventListener('click', ()=>{
+                                // Clear input fields and close modal
+                                document.getElementById("dailyName").value = '';
+                                document.getElementById("myModalDaily").style.display = 'none';
+                            })
+
+                            // Retrieve tasks from local storage and populate the task lists
+                            var courseSections = document.querySelectorAll('.course-section');
+                            const loadTasks = () => {courseSections.forEach(function(section) {
+                                var courseName = section.querySelector('h2').textContent;
+                                var taskKey = 'tasks-' + courseName;
+                                var tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+
+                                var taskList = section.querySelector('.task-list');
+                                taskList.innerHTML = '';
+                                tasks.forEach(function(task) {
+                                    var li = document.createElement('li');
+                                    li.textContent = task.name + ' (Due: ' + task.dueDate + ')';
+                                    if (task.complete) {
+                                        li.classList.add('complete');
+                                    }
+
+                                    var completeButton = document.createElement('button');
+                                    completeButton.textContent = 'Complete';
+                                    completeButton.addEventListener('click', function() {
+                                        li.classList.toggle('complete');
+                                        task.complete = !task.complete;
+
+                                        // Update task completion status in local storage
+                                        localStorage.setItem(taskKey, JSON.stringify(tasks));
+                                    });
+
+                                    var deleteButton = document.createElement('button');
+                                    deleteButton.textContent = 'Delete';
+                                    deleteButton.addEventListener('click', function() {
+                                        taskList.removeChild(li);
+
+                                        // Remove task from local storage
+                                        tasks = tasks.filter(function(t) {
+                                            return t.name !== task.name && t.dueDate !== task.dueDate;
+                                        });
+                                        localStorage.setItem(taskKey, JSON.stringify(tasks));
+                                    });
+
+                                    li.appendChild(completeButton);
+                                    li.appendChild(deleteButton);
+                                    taskList.appendChild(li);
+                                });
+                            });
+                            }
+                            // Retrieve dailys from local storage and populate the daily lists
+                            var courseSections = document.querySelectorAll('.course-section');
+                            const loadDailys = (renewFlag) => {
+                                var dailyKey = 'daily';
+                                var dailys = JSON.parse(localStorage.getItem(dailyKey)) || [];
+
+                                var dailyList = document.querySelector('.daily-list');
+                                dailyList.innerHTML = '';
+                                dailys.forEach(function(daily) {
+                                    var li = document.createElement('li');
+                                    li.textContent = daily.name;
+                                    if (daily.complete) {
+                                        li.classList.add('complete');
+                                    }
+                                    if(renewFlag){
+                                        daily.complete = false;
+                                        li.classList.remove('complete');
+                                    }
+
+                                    var completeButton = document.createElement('button');
+                                    completeButton.textContent = 'Complete';
+                                    completeButton.addEventListener('click', function() {
+                                        li.classList.toggle('complete');
+                                        daily.complete = !daily.complete;
+
+                                        // Update task completion status in local storage
+                                        localStorage.setItem(dailyKey, JSON.stringify(dailys));
+                                    });
+
+                                    var deleteButton = document.createElement('button');
+                                    deleteButton.textContent = 'Delete';
+                                    deleteButton.addEventListener('click', function() {
+                                        dailyList.removeChild(li);
+
+                                        // Remove task from local storage
+                                        dailys = dailys.filter(function(t) {
+                                            return t.name !== daily.name;
+                                        });
+                                        localStorage.setItem(dailyKey, JSON.stringify(dailys));
+                                    });
+
+                                    li.appendChild(completeButton);
+                                    li.appendChild(deleteButton);
+                                    dailyList.appendChild(li);
+                                });
+                            }
+                            loadTasks();
+                            loadDailys(false);
+                        </script>
+                        <script>
+                            function getDateStringYMD(date) {
+                                return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+                            }
+                            function isMoreThanOneDayApart(today, yesterday) {
+                                var date1 = (new Date(...today.split('-'), 0, 0, 0, 0)).getTime();
+                                var date2 = (new Date(...yesterday.split('-'), 0, 0, 0, 0)).getTime();
+                                return !!(date1 - date2);
+                            }
+
+                            window.addEventListener('load', () => {
+                                if(!JSON.parse(localStorage.getItem("timeFlag")))
+                                    localStorage.setItem('timeFlag', JSON.stringify({lastDate: getDateStringYMD(new Date())}));
+                                else {
+                                    if(isMoreThanOneDayApart(getDateStringYMD(new Date()), JSON.parse(localStorage.getItem("timeFlag")))){
+                                        localStorage.setItem('timeFlag', JSON.stringify({lastDate: getDateStringYMD(new Date())}));
+                                        loadDailys(true);
+                                    }
+                                }
+                            });
+                        </script>
+    </body>
 </html>
