@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Home Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    #websites {
+      margin-top: 20px;
+    }
+
+    #websites a {
+      display: inline-block;
+      padding: 10px;
+      margin-right: 10px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    #dashboard {
+      margin-top: 30px;
+    }
+
+    .course-section {
+      margin-bottom: 20px;
+    }
+
+    .course-section h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .task-list {
+      margin-top: 10px;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task-list li {
+      margin-bottom: 5px;
+    }
+
+    .task-list li.complete {
+      color: green;
+    }
+
+    .task-list li button {
+      margin-left: 10px;
+    }
+
+    #myModal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content input[type="date"] {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 5px;
+    }
+
+    .modal-content button {
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="currentDate"></h1>
+
+  <div id="websites">
+    <a href="http://website1.com">Website 1 &#x1F30D;</a>
+    <a href="http://website2.com">Website 2 &#x1F4D6;</a>
+    <a href="http://website3.com">Website 3 &#x1F4D9;</a>
+    <a href="http://website4.com">Website 4 &#x1F4E1;</a>
+    <a href="http://website5.com">Website 5 &#x1F680;</a>
+  </div>
+
+  <div id="dashboard">
+      <button class="add-task">Add Task</button>
+      <div class="course-section" id='ESC301'>
+          <h2>Course 1 ESC301</h2>
+          <ul class="task-list"></ul>
+      </div>
+      <div class="course-section">
+          <h2>Course 2</h2>
+          <ul class="task-list"></ul>
+      </div>
+      <div class="course-section">
+          <h2>Course 3</h2>
+          <ul class="task-list"></ul>
+      </div>
+      <div class="course-section">
+          <h2>Course 4</h2>
+          <ul class="task-list"></ul>
+      </div>
+      <div class="course-section">
+          <h2>Course 5</h2>
+          <ul class="task-list"></ul>
+      </div>
+  </div>
+
+  <div id="myModal">
+      <div class="modal-content">
+          <input type="text" id="taskName" placeholder="Task name">
+          <input type="date" id="dueDate">
+          <input type="text" id="courseName" placeholder="Course">
+          <button id="submitTask">Submit</button>
+      </div>
+  </div>
+
+  <script>
+      // Get current date and display it
+      var currentDateElement = document.getElementById('currentDate');
+      var currentDate = new Date().toDateString();
+      currentDateElement.textContent = currentDate;
+
+      // Websites LMAO this has to be unecessary
+      var websiteLinks = document.querySelectorAll('#websites a');
+      websiteLinks.forEach(function(link) {
+          link.addEventListener('click', function(event) {
+              event.preventDefault();
+              var url = this.getAttribute('href');
+              window.open(url, '_blank');
+          });
+      });
+
+      // Task Modal
+      var modal = document.getElementById('myModal');
+      var addTaskButtons = document.querySelectorAll('.add-task');
+      var submitTaskButton = document.getElementById('submitTask');
+      var taskNameInput = document.getElementById('taskName');
+      var dueDateInput = document.getElementById('dueDate');
+      var courseNameInput = document.getElementById('courseName');
+
+      addTaskButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+              modal.style.display = 'block';
+          });
+      });
+
+      submitTaskButton.addEventListener('click', function(e) {
+          var taskName = taskNameInput.value.trim();
+          var dueDate = dueDateInput.value.trim();
+          if (taskName !== '' && dueDate !== '') {
+              var courseSection = document.getElementById(courseNameInput.value);
+              var taskList = courseSection.querySelector('.task-list');
+
+              var li = document.createElement('li');
+              li.textContent = taskName + ' (Due: ' + dueDate + ')';
+              var completeButton = document.createElement('button');
+              completeButton.textContent = 'Complete';
+              completeButton.addEventListener('click', function() {
+                  li.classList.toggle('complete');
+                  task.complete = !task.complete;
+
+                  // Update task completion status in local storage
+                  localStorage.setItem(taskKey, JSON.stringify(tasks));
+              });
+
+              var deleteButton = document.createElement('button');
+              deleteButton.textContent = 'Delete';
+              deleteButton.addEventListener('click', function() {
+                  taskList.removeChild(li);
+
+                  // Remove task from local storage
+                  tasks = tasks.filter(function(t) {
+                      return t.name !== task.name && t.dueDate !== task.dueDate;
+                  });
+                  localStorage.setItem(taskKey, JSON.stringify(tasks));
+              });
+
+              li.appendChild(completeButton);
+              li.appendChild(deleteButton);
+              taskList.appendChild(li);
+
+              // Save task to local storage
+              var courseName = courseSection.querySelector('h2').textContent;
+              var taskKey = 'tasks-' + courseName;
+              var tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+              tasks.push({ name: taskName, dueDate: dueDate, complete: false });
+              localStorage.setItem(taskKey, JSON.stringify(tasks));
+
+              // Clear input fields and close modal
+              taskNameInput.value = '';
+              dueDateInput.value = '';
+              courseNameInput.value = '';
+              modal.style.display = 'none';
+          }
+      });
+
+      // Retrieve tasks from local storage and populate the task lists
+      var courseSections = document.querySelectorAll('.course-section');
+      courseSections.forEach(function(section) {
+          var courseName = section.querySelector('h2').textContent;
+          var taskKey = 'tasks-' + courseName;
+          var tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+
+          var taskList = section.querySelector('.task-list');
+          tasks.forEach(function(task) {
+              var li = document.createElement('li');
+              li.textContent = task.name + ' (Due: ' + task.dueDate + ')';
+              if (task.complete) {
+                  li.classList.add('complete');
+              }
+
+              var completeButton = document.createElement('button');
+              completeButton.textContent = 'Complete';
+              completeButton.addEventListener('click', function() {
+                  li.classList.toggle('complete');
+                  task.complete = !task.complete;
+
+                  // Update task completion status in local storage
+                  localStorage.setItem(taskKey, JSON.stringify(tasks));
+              });
+
+              var deleteButton = document.createElement('button');
+              deleteButton.textContent = 'Delete';
+              deleteButton.addEventListener('click', function() {
+                  taskList.removeChild(li);
+
+                  // Remove task from local storage
+                  tasks = tasks.filter(function(t) {
+                      return t.name !== task.name && t.dueDate !== task.dueDate;
+                  });
+                  localStorage.setItem(taskKey, JSON.stringify(tasks));
+              });
+
+              li.appendChild(completeButton);
+              li.appendChild(deleteButton);
+              taskList.appendChild(li);
+          });
+      });
+  </script>
+</body>
+</html>
